@@ -1,0 +1,38 @@
+  
+<div style="height:105%; display: flex; justify-content: center; height: max-content;">
+    <mat-card class="mat-elevation-z8" style="margin-top: 10%; margin-bottom: 10%; width: 60%; height: 80%; display: flex; justify-content: center; align-items: center; height: max-content; padding-top: 20px; opacity: 80%;">
+            <form #feedform="ngForm" style="width: 80%;" (ngSubmit)="submit()" novalidate>
+
+                <h2 style="text-align: center;">
+                    Kreiraj Stori
+                </h2>
+
+                <div style="display: grid; grid-row-gap: 50px; margin-top: 5%;">
+                    <label class="item1">Objavi ga samo bliskim prijateljima?</label>
+                    <mat-radio-group #ano = "ngModel" name="a" class="item2"  [(ngModel)] = "closeFriends">
+                        <mat-radio-button id="yes"  value="0">Da</mat-radio-button>
+                        <mat-radio-button id="no"  value="1">Ne</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+               
+        
+                  <div  style="margin-top: 5%; margin-bottom: 1%; text-align: center;">
+                    <input style="display: none;" type="file" (change)="onFileSelected($event)" accept=".jpg, .png, .mp4" #fileInput>
+                    <span class="phone-in-line" style="max-width: 35%;">
+                      <button mat-raised-button color="accent" type="button" style="padding: 12px 32px; margin-right: 1%;" (click)="fileInput.click()">
+                        <mat-label [hidden]="!selectedFileHide">Odaberi</mat-label>
+                        <mat-label [hidden]="selectedFileHide">{{fileName}}</mat-label>
+                      </button>
+                    </span>
+                    <span class="phone-in-line" style="max-width: 35%;">
+                      <button mat-raised-button color="primary" style="padding: 12px 32px; margin-left: 12%;" [disabled] ="ano.pristine" type="submit" >Kreiraj</button>
+                    </span>
+                </div> 
+
+                  
+
+        
+            </form>
+            
+    </mat-card>
+</div> 

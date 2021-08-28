@@ -1,0 +1,57 @@
+<div class="main-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <mat-card>
+            <h3>Registracija administratora</h3>
+            <hr>
+            <form [formGroup]="registerForm">
+
+              <div class="form-group">
+                  <label for="email">Email (u formi validne email adrese)</label>
+                  <input type="text" formControlName="email" id="email" class="form-control"/>
+                  <div *ngIf="f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email je obavezno polje</div>
+                        <div *ngIf="f.email.errors.email">Email mora biti ispravna email adresa</div>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="password">Lozinka (minimalno 10 karaktera, broj, veliko slovo, malo slovo i specijalni karakter)</label>
+                  <input type="password" formControlName="password" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Lozinka je obavezno polje</div>
+                      <!-- jos neka ogranicenja na lozinku duzina, karakteri itd... -->
+                  </div>
+              </div>
+
+              <div class="form-group">
+                <label for="password">Ponovljena lozinka (minimalno 10 karaktera, broj, veliko slovo, malo slovo i specijalni karakter)</label>
+                <input type="password" formControlName="repeatedPassword" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">Lozinka je obavezno polje</div>
+                    <!-- jos neka ogranicenja na lozinku duzina, karakteri itd... -->
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label for="password">Ime</label>
+                <input  type="text" formControlName="firstName" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Prezime</label>
+                <input  type="text" formControlName="lastName" class="form-control">
+            </div>
+        
+              <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!registerForm.valid">Registruj</button>
+
+            
+            </form>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

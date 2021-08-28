@@ -1,0 +1,88 @@
+<!-- NAVIGACIJA SA DESNE STRANE -->
+
+<mat-sidenav-container class="sidenav-container">
+
+    <mat-sidenav #drawer class="sidenav"  fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'side' : 'side'" [opened]="!(isHandset$ | async)">
+
+      <mat-toolbar color="primary">Sadržaj</mat-toolbar>
+
+       <!-- U ZAVISNOSTI OD ROLE MENJA SE SADRZAJ TOOLBARA-->
+       <mat-nav-list *ngIf="!isLoggedIn()">
+        <a mat-list-item href="/login">Prijavi se</a>
+        <a mat-list-item href="/register">Registruj se</a>
+      </mat-nav-list>
+
+      <mat-nav-list *ngIf="isAdmin()">
+        <a mat-list-item routerLink="/admin-profile">Profil administratora</a>
+        <a mat-list-item routerLink="/verification-requests">Zahtevi za verifikaciju</a>
+        <a mat-list-item routerLink="/register-admin">Registracija administratora</a>
+
+      </mat-nav-list>
+
+      <mat-nav-list *ngIf="isUser()">
+        <a mat-list-item (click)="goToProfile()">Moj profil</a>
+        <a mat-list-item routerLink="/settings/user">Podešavanje profila</a>
+        <a mat-list-item routerLink="/notifications">Notifikacije</a>
+        <a mat-list-item routerLink="/create-post">Okači post</a>
+        <a mat-list-item routerLink="/create-story">Okači stori</a>
+        <a mat-list-item routerLink="/create-album">Napravi album</a>
+        <a mat-list-item routerLink="/verify-profile">Verifikuj profil</a>
+      </mat-nav-list>
+    
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+      <mat-toolbar color="primary">
+
+        <span>
+          <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+              <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+          <button type="button"  mat-icon-button >
+              <img class="app-angular-logo" src="assets/images/logo.png">
+          </button>
+          {{title}}
+        </span>
+
+        <span style="margin-left: 100px;" *ngIf="!isAdmin()">
+          <mat-form-field>
+              <input type="text" placeholder="pretraga" matInput [matAutocomplete]="auto" (input)="updated()" [(ngModel)]="query">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of options" [value]="option.name" (click)="seeDetails(option.id)">
+                  <span>{{option.name}}</span> |
+                  <small>{{option.type}}</small>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+      </span>
+
+        <div *ngIf="!isLoggedIn()" style="position: absolute; right: 0;">
+          <button  mat-button mat-ripple routerLink="/login">
+              <span>Prijava</span>
+          </button>
+          <button  mat-button mat-ripple routerLink="/register">
+             <span>Registracija</span>
+          </button>
+        </div>
+        <div *ngIf="isLoggedIn()" style="position: absolute; right: 0;">
+          <button  mat-button mat-ripple (click)="onLogout()">
+              Odjava
+          </button>
+        </div>
+
+      </mat-toolbar>
+
+      <!-- Ovde rutiranjem menjas sadrzaj u glavnom prozoru! -->
+      <div class="container">
+
+          <router-outlet></router-outlet>
+
+        </div>
+
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

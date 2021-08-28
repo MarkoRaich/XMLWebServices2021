@@ -1,0 +1,62 @@
+  
+<div style="height:105%; display: flex; justify-content: center; height: max-content;">
+    <mat-card class="mat-elevation-z8" style="margin-top: 4%; margin-bottom: 5%; width: 60%; height: 80%; display: flex; justify-content: center; align-items: center; height: max-content; padding-top: 20px; opacity: 80%;">
+            <form #feedform="ngForm" style="width: 80%;" (ngSubmit)="submit()" novalidate>
+
+                <h2 style="text-align: center;">
+                    Kreiraj Post
+                </h2>
+
+                <div style="margin-bottom: 5%;"> 
+                    <mat-form-field style="width:100%;">
+                        <mat-label>Opis</mat-label>
+                        <input matInput   placeholder="Add post description" id="postDescription" #name = "ngModel" name="c1" [(ngModel)] = "description" style="height: 40%;"/>
+                    </mat-form-field>
+                  </div>
+                  <div style="margin-bottom: 5%;">
+                    <mat-form-field style="width:100%;">
+                        <mat-label>Lokacija</mat-label>
+                        <input matInput   placeholder="Add post location" id="postLocation" #name2 = "ngModel" name="c2"[(ngModel)] = "location" style="height: 40%;"/>
+                    </mat-form-field>
+                </div>
+                <div style="margin-bottom: 5%;">
+                    <mat-form-field style="width:100%;">
+                        <mat-label>Tagovi</mat-label>
+                        <input matInput  id="postTag"  #name3 = "ngModel" name="c11"  [(ngModel)] = "tag" style="height: 40%;"/>
+                    </mat-form-field>
+                    <button mat-stroked-button color="accent" type="button" id="selectButton" (click)="OnClick()">DODAJ TAG</button>
+                </div>
+                
+                <div style="display: flex; justify-content: center; margin-top: 5%; margin-bottom: 5%;">
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                    
+                      <ng-container matColumnDef="tag">
+                        <th mat-header-cell *matHeaderCellDef> Lista tagova </th>
+                        <td mat-cell *matCellDef="let element"> {{element}} </td>
+                      </ng-container>
+                  
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                  </div>
+        
+                  <div  style="margin-top: 22px; margin-bottom: 1%; text-align: center;">
+                    <input style="display: none;" type="file" (change)="onFileSelected($event)" accept=".jpg, .png, .mp4" #fileInput>
+                    <span class="phone-in-line" style="max-width: 35%;">
+                      <button mat-raised-button color="accent" type="button" style="padding: 12px 32px; margin-right: 1%;" (click)="fileInput.click()">
+                        <mat-label [hidden]="!selectedFileHide">Odaberi fajl</mat-label>
+                        <mat-label [hidden]="selectedFileHide">{{fileName}}</mat-label>
+                      </button>
+                    </span>
+                    <span class="phone-in-line" style="max-width: 35%;">
+                      <button mat-raised-button color="primary" style="padding: 12px 32px; margin-left: 12%;" [disabled] ="" type="submit" >Kreiraj</button>
+                    </span>
+                </div> 
+
+                  
+
+        
+            </form>
+            
+    </mat-card>
+</div> 

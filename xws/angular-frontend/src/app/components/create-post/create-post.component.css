@@ -1,0 +1,28 @@
+table {
+    width: 100%;
+  } 
+.mat-header-cell {
+    background-color: rgb(66, 65, 68);
+    font-size: larger;
+    color: white;
+    width: 50%;
+  }
+
+.mat-row:hover {
+      background-color: rgb(250, 242, 231);
+  }
+  :host-context {
+    background-color: indigo;
+  }
+
+label {
+      margin-right: 16px;
+  }
+
+.form-field{
+    display: block
+}
+.phone-in-line {
+    width: 35%;
+  }
+  

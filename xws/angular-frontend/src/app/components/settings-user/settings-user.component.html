@@ -1,0 +1,167 @@
+  <div class="main-content">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-8 offset-md-2">
+              <mat-card>
+                  <h3>Izmena i podešavanje naloga</h3>
+                  <hr>
+
+                  <form [formGroup]="SettingsForm" (ngSubmit)="saveChanges()">
+
+                    <table class="form-full-width table-font" cellspacing="0">
+
+                      <tr>
+                        <td><label>Korisničko ime</label></td>
+                        <td>
+                          <mat-form-field class="form-full-width-td">
+                            <input matInput formControlName="accountName">
+                            <i matSuffix class="material-icons">edit</i>
+                            <mat-error
+                              *ngIf="SettingsForm.get('accountName').errors && SettingsForm.get('accountName').errors['required']">
+                              Unesite Vaše korisničko ime.
+                            </mat-error>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td><label>Ime</label></td>
+                        <td>
+                          <mat-form-field class="form-full-width-td">
+                            <input matInput formControlName="firstName">
+                            <i matSuffix class="material-icons">edit</i>
+                            <mat-error
+                              *ngIf="SettingsForm.get('firstName').errors && SettingsForm.get('firstName').errors['required']">
+                              Unesite Vaše ime.
+                            </mat-error>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td><label>Prezime</label></td>
+                        <td>
+                          <mat-form-field class="form-full-width-td">
+                            <input matInput formControlName="lastName">
+                            <i matSuffix class="material-icons">edit</i>
+                            <mat-error
+                              *ngIf="SettingsForm.get('lastName').errors && SettingsForm.get('lastName').errors['required']">
+                              Unesite Vaše prezime.
+                            </mat-error>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td><label>Biografija</label></td>
+                        <td>
+                          <mat-form-field class="form-full-width-td">
+                            <input matInput formControlName="biography">
+                            <i matSuffix class="material-icons">edit</i>
+                            <mat-error
+                              *ngIf="SettingsForm.get('biography').errors && SettingsForm.get('biography').errors['required']">
+                              Unesite opis.
+                            </mat-error>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td><label>Broj telefona</label></td>
+                        <td>
+                          <mat-form-field class="form-full-width-td">
+                            <input matInput formControlName="phoneNumber">
+                            <i matSuffix class="material-icons">edit</i>
+                            <mat-error
+                              *ngIf="SettingsForm.get('phoneNumber').errors && SettingsForm.get('phoneNumber').errors['required']">
+                              Unesite Vaš broj telefona.
+                            </mat-error>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td><label>Datum rodjenja</label></td>
+                        <td>
+                          <mat-form-field class="form-full-width-td">
+                            <input matInput  type="date" min="1920-01-01" max="2015-01-01" formControlName="dateOfBirth">
+                            <i matSuffix class="material-icons">edit</i>
+                            <mat-error
+                              *ngIf="SettingsForm.get('dateOfBirth').errors && SettingsForm.get('dateOfBirth').errors['required']">
+                              Unesite Vaš datum rodjenja.
+                            </mat-error>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td><label>Pol</label></td>
+                        <td>
+                          <mat-form-field class="form-full-width-td">
+                            <mat-select formControlName="gender">
+                              <mat-option value="MALE">Muški</mat-option>
+                              <mat-option value="FEMALE">Ženski</mat-option>
+                          </mat-select>
+                            <i matSuffix class="material-icons">edit</i>
+                            <mat-error
+                              *ngIf="SettingsForm.get('gender').errors && SettingsForm.get('gender').errors['required']">
+                              Unesite Vaš pol.
+                            </mat-error>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td><label>Website</label></td>
+                        <td>
+                          <mat-form-field class="form-full-width-td">
+                            <input matInput formControlName="website">
+                            <i matSuffix class="material-icons">edit</i>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td><label>Profil je javni</label></td>
+                        <td>
+                           <mat-slide-toggle formControlName="userIsPublic"></mat-slide-toggle>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td><label>Dozvoljavam primanje poruka od strane profila koje ne pratim</label></td>
+                        <td>
+                           <mat-slide-toggle formControlName="canReceiveMessages"></mat-slide-toggle>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td><label>Dozvoljavam tagovanje</label></td>
+                        <td>
+                           <mat-slide-toggle formControlName="canBeTagged"></mat-slide-toggle>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td><label>Dozvoljavam notifikacije</label></td>
+                        <td>
+                           <mat-slide-toggle formControlName="canReceiveNotifications"></mat-slide-toggle>
+                        </td>
+                      </tr>
+
+                    </table>
+
+                    <div class="text-center">
+                      <button mat-raised-button color="primary">Sačuvaj izmene</button>
+                     
+                    </div>
+                  </form>
+                </mat-card>
+              </div>
+          </div>
+  
+      </div>
+  
+  </div>
+
+  

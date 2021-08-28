@@ -1,0 +1,112 @@
+<div class="main-content">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-8 offset-md-2">
+                  <mat-card>
+                      <h3>Registracija</h3>
+                      <hr>
+                      
+                      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+                        <div class="form-group">
+                            <label for="email">Email (u formi validne email adrese)</label>
+                            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                  <div *ngIf="f.email.errors.required">Email je obavezno polje</div>
+                                  <div *ngIf="f.email.errors.email">Email mora biti ispravna email adresa</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Lozinka</label>
+                            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                  <div *ngIf="f.password.errors.required">Lozinka je obavezno polje</div>     
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="repeatedPassword">Ponovljena lozinka </label>
+                          <input type="password" formControlName="repeatedPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.repeatedPassword.errors }" />
+                          <div *ngIf="submitted && f.repeatedPassword.errors" class="invalid-feedback">
+                                <div *ngIf="f.repeatedPassword.errors.required">Lozinka je obavezno polje</div>                                
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="accountName">Korisničko ime</label>
+                            <input  type="text" formControlName="accountName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.accountName.errors }" />
+                            <div *ngIf="submitted && f.accountName.errors" class="invalid-feedback">
+                                <div *ngIf="f.accountName.errors.required">Opšte ime je obavezno polje</div>
+                                <div *ngIf="f.accountName.errors.pattern">Opšte ime ne ispunjava kriterijume</div>
+                            </div>
+                        </div>
+                  
+                        <div class="form-group">
+                            <label for="fistName">Ime</label>
+                            <input  type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                <div *ngIf="f.firstName.errors.required">Ime je obavezno polje</div>
+                                <div *ngIf="f.firstName.errors.pattern">Ime ne ispunjava kriterijume</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Prezime</label>
+                            <input  type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                                <div *ngIf="f.lastName.errors.required">Prezime je obavezno polje</div>
+                                <div *ngIf="f.lastName.errors.pattern">Prezime ne ispunjava kriterijume</div>
+                            </div>
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="biography">Biografija</label>
+                            <input  type="text" formControlName="biography" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.biography.errors }" />
+                            <div *ngIf="submitted && f.biography.errors" class="invalid-feedback">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phoneNumber">Broj telefona</label>
+                            <input  type="text" formControlName="phoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" />
+                            <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+                                <div *ngIf="f.phoneNumber.errors.required">Broj telefona je obavezno polje</div>
+                                <div *ngIf="f.phoneNumber.errors.pattern">Broj telefona ne ispunjava kriterijume</div>
+                            </div>
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="dateOfBirth">Datum rodjenja</label>
+                            <input  type="date" min="1920-01-01" max="2015-01-01" formControlName="dateOfBirth" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dateOfBirth.errors }" />
+                            <div *ngIf="submitted && f.dateOfBirth.errors" class="invalid-feedback">
+                                <div *ngIf="f.dateOfBirth.errors.required">Datum rodjenja je obavezno polje</div>
+                                <div *ngIf="f.dateOfBirth.errors.pattern">Datum rodjenja ne ispunjava kriterijume</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gender">Pol</label>
+                            <mat-select formControlName="gender">
+                                <mat-option value="MALE">Muški</mat-option>
+                                <mat-option value="FEMALE">Ženski</mat-option>
+                            </mat-select>
+                        </div>
+
+                  
+                        <div class="text-center">
+                          <button mat-raised-button color="primary">Registruj se</button>
+                          <button mat-raised-button  type="reset" (click)="onReset()">Poništi</button>
+                        </div>
+                      
+                      </form>
+                </mat-card>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+

@@ -1,0 +1,117 @@
+<div id="profile_info" style="margin-top: 50px; margin-left: 15%; width: 70%; height: max-content;">
+
+    <div style="float: left; width: 200px; height: 200px; margin-right: 20px; overflow: hidden; border-radius: 50%;">
+        <ng-image-slider style="width: 100px;"
+            [images]="stories['slider']"
+            imageSize="{width: '100px', height: '100px', space: 4}"
+            [imagePopup]="true"
+            [showArrow]="false"
+            [arrowKeyMove]="false"
+            #nav>
+        </ng-image-slider>
+    </div>
+    
+    
+    <div style="float: left; width: max-content; height: max-content; margin-bottom: 30px;" >
+        <p style="font-size: 30px;">{{profile.username}}<img style="margin-left: 10px; width: 25px; height: 25px;" *ngIf = "profile.verified" src = "../../../../assets/images/correct.png"/></p>
+        <p style="font-size: large;">
+            <button mat-flat-button (click) = "getFollowers()" [disabled]= "profile.privateProfile && !profile.following && !profile.owned">{{profile.followerCount}} pratioci </button>
+            <button mat-flat-button (click) = "getFollowing()"[disabled]= "profile.privateProfile && !profile.following  && !profile.owned">{{profile.followingCount}} prati </button>
+            <button *ngIf="this.userService.isLoggedIn() && profile.owned" mat-stroked-button style="margin-left: 10px;" (click)="followRequests()">Zahtevi</button>
+            <button *ngIf="this.userService.isLoggedIn() && profile.owned" mat-stroked-button style="margin-left: 10px;" (click)="closeFriends()">Bliski prijatelji</button>
+            <button *ngIf="this.userService.isLoggedIn() && !profile.owned && !profile.following" mat-raised-button color="primary" style="margin-left: 10px;" (click) = "follow(profile.privateProfile, profile.username)">Prati</button>
+            <button *ngIf="this.userService.isLoggedIn() && !profile.owned && profile.following" mat-raised-button color="primary" style="margin-left: 10px;" (click) = "unfollow(profile.username)">Otprati</button>
+            <button *ngIf="this.userService.isLoggedIn() && !profile.owned" mat-raised-button color="warn" style="margin-left: 10px;" (click) = "block(profile.username)">Blokiraj</button>
+        </p>
+        <p>
+            <button *ngIf="this.userService.isLoggedIn() && profile.owned" mat-stroked-button style="margin-left: 10px;" (click)="ratings()">Ocene</button>
+           <!-- <button *ngIf="this.userService.isLoggedIn() && (!(profile.privateProfile && !profile.following) || profile.owned)" mat-stroked-button style="margin-left: 10px;" (click)="shareStories()">Share stories</button> -->
+        </p>
+        <p style="color: gray;" *ngIf="profile.fullName != null">Ime i Prezime : {{profile.fullName}}</p>
+        <p style="color: gray;" *ngIf="profile.gender != null">Pol : {{profile.gender}}</p>
+        <p style="color: gray;" *ngIf="profile.website != null">Website: {{profile.website}}</p>
+        <p style="color: gray;" *ngIf="profile.bio != null">Bio: {{profile.bio}}</p>
+    </div>
+
+</div>
+
+<div></div>
+
+
+<div id="stories" *ngIf="profile.owned || profile.following || !profile.privateProfile" class="mat-elevation-z8" style="margin-left: 20%; margin-top: 50px; width: 60%; height: max-content; overflow-x: hidden;">
+    <div style="float: left; width: 150px; height: 150px; margin-right: 20px; overflow: hidden; border-radius: 50%;">
+        <ng-image-slider style="width: 100px;"
+            [images]="storyHighlights['slider']"
+            imageSize="{width: '100px', height: '100px', space: 4}"
+            [imagePopup]="true"
+            [showArrow]="false"
+            [arrowKeyMove]="false"
+            #nav>
+        </ng-image-slider>
+    </div>
+</div> 
+
+
+<div style="margin-top:50px; width: 100%; height: max-content; display: inline-block;">
+    <mat-tab-group mat-align-tabs="center" *ngIf="profile.owned || profile.following || !profile.privateProfile">
+        <mat-tab label="Posts">
+            <div class="content" fxLayout="row wrap">
+                <div id="p" fxFlex="25%" (click)="seeDetails(post.id)" *ngFor ="let post of posts" style="margin: 20px; width: 200px; height: 200px; overflow: hidden; display:inline-block;">
+                    <ng-image-slider style="width: 200px;"
+                        [images]="post['slider']"
+                        [imageSize]="{width: 200, height: 200, space: 4}"
+                        [imagePopup]="true"
+                        [showArrow]="false"
+                        [arrowKeyMove]="false"
+                        #nav2>
+                    </ng-image-slider>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Favourites" *ngIf="profile.owned">
+            <div class="content" fxLayout="row wrap">
+                <div id="f" fxFlex="25%" *ngFor ="let fav of favourites" style="margin: 20px; width: 200px; height: 250px; overflow: hidden; display:inline-block;">
+                    <ng-image-slider style="width: 200px;"
+                        [images]="fav['slider']"
+                        [imageSize]="{width: 200, height: 200, space: 4}"
+                        [imagePopup]="true"
+                        [showArrow]="false"
+                        [arrowKeyMove]="false"
+                        #nav2>
+                    </ng-image-slider>
+                    <button mat-raised-button style = "width: 200px;"(click) = "addToCollection(fav)">Add to collections</button>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Collections" *ngIf="profile.owned">
+            <div class="content" fxLayout="row wrap">
+                <div id="f" fxFlex="25%" *ngFor ="let coll of collections1" style="margin: 20px; width: 200px; height: 250px; overflow: hidden; display:inline-block;">
+                    <ng-image-slider style="width: 200px;"
+                        [images]="coll"
+                        [imageSize]="{width: 200, height: 200, space: 4}"
+                        [imagePopup]="true"
+                        [showArrow]="false"
+                        [arrowKeyMove]="false"
+                        #nav2>
+                    </ng-image-slider>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Stories" *ngIf="profile.owned"><div class="content" fxLayout="row wrap">
+            <div *ngFor="let story of allStories" style="width: 200px; height: 250px; margin-right: 20px; overflow: hidden; display:inline-block;">
+                <ng-image-slider style="width: 100px;"
+                    [images]="story['slider']"
+                    imageSize="{width: 200, height: 200, space: 4}"
+                    [imagePopup]="true"
+                    [showArrow]="false"
+                    [arrowKeyMove]="false"
+                    #nav>
+                </ng-image-slider>
+                <button mat-raised-button id = "story.id" *ngIf = "!includes(story.id)" style = "width: 200px;"(click) = "addToHighlights(story)">Add to highlights</button>
+            </div>
+        </div></mat-tab>
+    </mat-tab-group>
+    <div *ngIf="profile.privateProfile && !profile.following && !profile.owned" style="text-align: center; margin-top: 50px; font-size: large;">This profile is private</div>
+</div>
+
+
